@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Income List{% endblock %}
+
+{% block content %}
+  <h1>Income List</h1>
+
+  <form method="get">
+    <label for="{{ form.start_date.id_for_label }}">Start Date:</label>
+    {{ form.start_date }}
+    <label for="{{ form.end_date.id_for_label }}">End Date:</label>
+    {{ form.end_date }}
+    <button type="submit">Filter</button>
+  </form>
+
+   {% if user.is_authenticated %}
+    <a href="{% url 'create_income' %}" class="btn btn-primary btn-lg mt-3">Create New Income</a>
+
+    <h2>Income Transactions</h2>
+    <ul>
+      {% for income in incomes %}
+        <li>{{ income.amount }} - {{ income.category }} - {{ income.date }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Please <a href="{% url 'login' %}">login</a> or <a href="{% url 'registration' %}">register</a> to view your incomes.</p>
+  {% endif %}
+{% endblock %}

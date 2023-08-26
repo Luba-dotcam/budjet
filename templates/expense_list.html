@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Expense List{% endblock %}
+
+{% block content %}
+  <h1>Expense List</h1>
+
+  <form method="get">
+    <label for="{{ form.start_date.id_for_label }}">Start Date:</label>
+    {{ form.start_date }}
+    <label for="{{ form.end_date.id_for_label }}">End Date:</label>
+    {{ form.end_date }}
+    <button type="submit" class="btn btn-primary">Filter</button>
+  </form>
+
+  <a href="{% url 'create_expense' %}" class="btn btn-primary">Create Expense</a>
+
+  <h2>Expense Transactions</h2>
+  <ul>
+    {% for expense in expenses %}
+      <li>{{ expense.amount }} - {{ expense.category }} - {{ expense.date }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

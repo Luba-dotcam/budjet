@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Your Budget{% endblock %}
+
+{% block content %}
+<h2>Welcome to Your Budget</h2>
+<p>
+    {% if user.is_authenticated %}
+        Hello, {{ user.username }}!
+        <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+        Welcome, Guest!
+        <a href="{% url 'login' %}">Login</a>
+        or
+        <a href="{% url 'registration' %}">Register</a>
+    {% endif %}
+</p>
+{% endblock %}
